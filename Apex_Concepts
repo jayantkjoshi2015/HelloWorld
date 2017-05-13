@@ -1,0 +1,66 @@
+public class Apex_Concepts {
+   
+    /* Developed in 2012*/
+    /* Variables are declared here...*/
+    private integer varInteger1;
+    private final integer varInteger2;
+    public static integer varInteger3;
+    public string varString1;
+    public decimal varDecimal;
+    public double varDouble;
+    public boolean varBool;
+    
+    /* A constructor is code that is invoked when an object is created from the class blueprint.
+    - You do not need to write a constructor for every class. 
+    - If a class does not have a user-defined constructor, an implicit, no-argument, public one is used. 
+    - The syntax for a constructor is similar to a method, but it differs from a method definition in that 
+      it never has an explicit return type and it is not inherited by the object created from it. 
+    - After you write the constructor for a class, you must use the new keyword in order to instantiate an object 
+      from that class, using that constructor.
+    - If you write a constructor that takes arguments, you can then use that constructor to create an object 
+      using those arguments. If you create a constructor that takes arguments, and you still want to use a 
+      no-argument constructor, you must include one in your code. 
+    - Once you create a constructor for a class, you no longer have access to the default, no-argument 
+      public constructor. You must create your own. 
+    - In Apex, a constructor can be overloaded, that is, there can be more than one constructor for a class, 
+      each having different parameters. The following example illustrates a class with two constructors: 
+      one with no arguments and one that takes a simple Integer argument. It also illustrates how one 
+      constructor calls another constructor using the this(...) syntax, also know as constructor chaining.         
+     */
+    public Apex_Concepts(){
+        varInteger1 = 10;
+        varInteger2 = 20;
+        varInteger3 = 30;
+        varString1 = 'Inside Constructer';
+        System.debug('Inside Constructer!!!. The constructer is always called first. '+varInteger2);
+    }
+    /* global: This means the method or variable can be used by any Apex code that has access to the class, 
+      not just the Apex code in the same application. This access modifier should be used for any method that 
+      needs to be referenced outside of the application, either in the Web services API or by other Apex code. 
+      If you declare a method or variable as global, you must also declare the class that contains it as global.*/
+    
+    public void fun_public(){
+        varInteger1 = 100;
+        // This would not work as final variables can be assigned inside a constructor or while defining it.
+        //varInteger2 = 200;
+        varInteger3 = 300;
+        System.debug('This function is public with no return value ' +varInteger1 +' ' +varInteger2 +' '+varInteger3);
+        
+        A_HelloWorld_Workbook wb = new A_HelloWorld_Workbook();
+        wb.sayMe();
+        System.debug('This calls the method from a different class');
+        
+        Apex_Concepts ac = new Apex_Concepts();
+        ac.fun_private();
+    }
+    private void fun_private(){
+        varString1 = 'Inside Private function';
+        System.debug('This function is private with no return value ' +varString1);
+    }
+   /* protected void fun_protected(){
+        System.debug('This function is protected with no return value ');
+    }*/
+    public static void fun_static(){
+        System.debug('A static method does not need to be instantiated ');
+    }
+}
